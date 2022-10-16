@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useReducer } from "react";
+import AddCountry from "./AddCountry";
+import "./App.css";
+import Countries from "./Counties";
+import { CountriesActionTypes, countriesReducer } from "./countriesReducer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    const [countries, dispatch] = useReducer(countriesReducer, []);
+
+    function addCountry(country) {
+        dispatch({ type: CountriesActionTypes.add, payload: country });
+    }
+
+    function deleteCountry(countryCode) {
+        dispatch({ type: CountriesActionTypes.delete, payload: countryCode });
+    }
+
+    return (
+        <div className="manager">
+            <AddCountry
+                addCountry={addCountry}
+                addedCountryCodes={countries.map(({ code }) => code)}
+            />
+            <Countries countries={countries} deleteCountry={deleteCountry} />
+        </div>
+    );
 }
-
-export default App;
