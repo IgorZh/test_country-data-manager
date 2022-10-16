@@ -1,5 +1,5 @@
 import { useLazyQuery, gql } from "@apollo/client";
-import { useRef } from "react";
+import { useState } from "react";
 
 const GET_COUNTRY = gql`
     query Country($code: ID!) {
@@ -12,21 +12,45 @@ const GET_COUNTRY = gql`
     }
 `;
 
-export default function AddCountry() {
-    const [getCountry, { loading, error, data }] = useLazyQuery(GET_COUNTRY);
-    const inputRef = useRef();
+export default function AddCountry({ addCountry, addedCountryCodes }) {
+    const [getCountry, { loading }] = useLazyQuery(GET_COUNTRY);
+    const [value, setValue] = useState();
+    const [status, setStatus] = useState();
+
+    const addDisabled = loading || addedCountryCodes.includes(value) || !value
+    
+    async function handleAdd(event) {
+        event.preventDefault();
+
+        const { data, error } = await getCountry({
+            variables: { code: value },
+        });
+
+        if (error) {
+            setStatus("error, please retry");
+            return;
+        }
+
+        if (data?.country) {
+            addCountry(data?.country);
+            setValue('');
+            return;
+        }
+
+        setStatus("not found");
+    }
+
+    function handleChange(event) {
+        setValue(event.target.value);
+    }
 
     return (
-        <div>
-            <input ref={inputRef} />
-            <button
-                onClick={() =>
-                    getCountry({ variables: { code: inputRef.current.value } })
-                }
-            >
+        <form onSubmit={handleAdd}>
+            <input value={value} onChange={handleChange} />
+            <button type="submit" disabled={addDisabled}>
                 Add
             </button>
-            {data?.country?.name}
-        </div>
+            {status}
+        </form>
     );
 }
