@@ -41,7 +41,7 @@ export default function AddCountry({ addCountry, addedCountryCodes }) {
     }
 
     function handleChange(event) {
-        setValue(event.target.value);
+        setValue(event.target.value.toUpperCase());
     }
 
     return (
