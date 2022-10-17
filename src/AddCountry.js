@@ -28,15 +28,15 @@ export default function AddCountry({ addCountry, addedCountryCodes }) {
             variables: { code: value },
         });
 
-        if (error) {
-            setStatus("error, please retry");
+        if (data?.country) {
+            addCountry(data.country);
+            setValue("");
+            setStatus("added");
             return;
         }
 
-        if (data?.country) {
-            addCountry(data?.country);
-            setValue("");
-            setStatus("added");
+        if (error) {
+            setStatus("error, please retry");
             return;
         }
 
