@@ -14,11 +14,11 @@ const GET_COUNTRY = gql`
 
 export default function AddCountry({ addCountry, addedCountryCodes }) {
     const [getCountry, { loading }] = useLazyQuery(GET_COUNTRY);
-    const [value, setValue] = useState();
+    const [value, setValue] = useState("");
     const [status, setStatus] = useState();
 
-    const addDisabled = loading || addedCountryCodes.includes(value) || !value
-    
+    const addDisabled = loading || addedCountryCodes.includes(value) || !value;
+
     async function handleAdd(event) {
         event.preventDefault();
 
@@ -33,7 +33,7 @@ export default function AddCountry({ addCountry, addedCountryCodes }) {
 
         if (data?.country) {
             addCountry(data?.country);
-            setValue('');
+            setValue("");
             return;
         }
 
