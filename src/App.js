@@ -1,9 +1,9 @@
 import { useEffect, useReducer } from "react";
 import AddCountry from "./AddCountry";
-import "./App.css";
 import Countries from "./Counties";
 import { CountriesActionTypes, countriesReducer } from "./countriesReducer";
 import { getFromLocalStorage, saveToLocalStorage } from "./persist.utils";
+import "./App.css";
 
 const STORAGE_KEY = "__COUNTRIES_MANAGER_STORE__";
 

@@ -1,0 +1,14 @@
+.add-country {
+    display: flex;
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.add-country__button {
+    margin-left: 8px;
+}
+
+.add-country__message {
+    margin-left: 8px;
+}

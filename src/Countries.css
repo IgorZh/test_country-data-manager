@@ -1,0 +1,46 @@
+.countries {
+    margin-top: 16px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.countries__search-box {
+    display: flex;
+}
+
+.countries__message {
+    margin-left: 8px;
+}
+
+.countries__table {
+    margin-top: 8px;
+    width: 100%;
+    min-width: 500px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.countries__column {
+    padding: 8px 16px;
+}
+
+.countries__column_click {
+    cursor: pointer;
+}
+
+.countries__delete {
+    display: block;
+}
+
+.countries__row:nth-child(even) {
+    background-color: #cdcdcd;
+}
+
+.countries__total {
+    margin-top: 8px;
+}
+
+.scroll-container {
+    overflow-x: scroll;
+}

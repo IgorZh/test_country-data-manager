@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const MESSAGE_TIMEOUT = 1000;
 
-export default function TimerMessage({ children, onTimeout }) {
+export default function TimerMessage({ children, onTimeout, className }) {
     const childrenDefined = !!children;
 
     useEffect(() => {
@@ -19,5 +19,5 @@ export default function TimerMessage({ children, onTimeout }) {
         return null;
     }
 
-    return <div>{children}</div>;
+    return <div className={className}>{children}</div>;
 }
