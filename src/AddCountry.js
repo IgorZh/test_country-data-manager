@@ -1,5 +1,6 @@
 import { useLazyQuery, gql } from "@apollo/client";
 import { useState } from "react";
+import TimerMessage from "./TimerMessage";
 
 const GET_COUNTRY = gql`
     query Country($code: ID!) {
@@ -50,7 +51,7 @@ export default function AddCountry({ addCountry, addedCountryCodes }) {
             <button type="submit" disabled={addDisabled}>
                 Add
             </button>
-            {status}
+            <TimerMessage onTimeout={() => setStatus('')}>{status}</TimerMessage>
         </form>
     );
 }
